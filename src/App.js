@@ -18,7 +18,7 @@ function App() {
   //   setLastName(event.target.value);
   // }
 
-  const [formData, setFormData] = useState( {firstname: "", lastName: "", email: "", comments: "", isVisible: true});
+  const [formData, setFormData] = useState( {firstName: "", lastName: "", email: "", comments: "", isVisible: true, mode: "", favCar: ""});
 
   console.log(formData);
   
@@ -32,9 +32,15 @@ function App() {
       }
     });
   }
+  function submitHandler(event) {
+    event.preventDefault();
+
+    console.log("Printing is done........");
+    console.log(formData);
+  }
   return (
     <div className="App">
-      <form>
+      <form onSubmit={submitHandler}>
         <input
           type="text"
           placeholder='first name'
@@ -79,6 +85,54 @@ function App() {
           checked={formData.isVisible}
           />
           <label htmlFor='isVisible'>Am I Visible ?</label>
+          <br/>
+          <br/>
+
+          <fieldset>
+            <legend>Mode:</legend>
+            <input
+          type='radio'
+          onChange={changeHandler}
+          name='mode'
+          value="Online-Mode"
+          id='Online-Mode'
+          checked = {formData.mode == "Online-Mode"}
+          /> 
+          <label htmlFor='Online-mode'>Online Mode</label>
+          
+
+          <input
+          type='radio'
+          onChange={changeHandler}
+          name='mode'
+          value="Offline-Mode"
+          id='Offline-Mode'
+          checked = {formData.mode == "Offline-Mode"}
+          /> 
+          <label htmlFor='Offline-mode'>Offline Mode</label>
+          </fieldset>
+
+          <label htmlFor='favCar'>What is your favourite car ?</label>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <select
+          name='favCar'
+          id='favCar'
+          value={formData.favCar}
+          onChange={changeHandler}
+          >
+            <option value="maruti800">Maruti 800</option>
+            <option value="zen">Zen</option>
+            <option value="spark">Spark</option>
+            <option value="alto 800">Alto 800</option>
+            <option value="nexon">Nexon</option>
+            <option value="scorpio">Scorpio</option>
+          </select>
+
+          <br/>
+          <br/>
+          {/* <input type='Submit' value= 'Submit'/> */}
+          <button>Submit</button>
+          
       </form>
     </div>
   );
