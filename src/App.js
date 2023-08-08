@@ -18,13 +18,17 @@ function App() {
   //   setLastName(event.target.value);
   // }
 
-  const [formDate, setFormData] = useState( {firstname: "", lastName: ""});
+  const [formData, setFormData] = useState( {firstname: "", lastName: "", email: "", comments: "", isVisible: true});
+
+  console.log(formData);
+  
 
   function changeHandler(event) {
+    const {name, value, checked, type} = event.target
     setFormData(prevFormData => {
       return {
         ...prevFormData,
-        [event.target.name] : event.target.value
+        [name] : type == "checkbox" ? checked : value
       }
     });
   }
@@ -36,6 +40,7 @@ function App() {
           placeholder='first name'
           onChange={changeHandler}
           name="firstName"
+          value={formData.firstname}
           />
         <br/> 
         <br></br>
@@ -44,7 +49,36 @@ function App() {
           placeholder='last name'
           onChange={changeHandler}
           name="lastName"
+          value={formData.lastName}
+          /> 
+        <br/> 
+        <br></br>
+        <input
+          type="email"
+          placeholder='Enter your email address'
+          onChange={changeHandler}
+          name="email"
+          value={formData.email}
           />  
+          <br/>
+
+          <br/> 
+        <br></br>
+        <textarea
+          placeholder='Enter your comments here'
+          onChange={changeHandler}
+          name="comments"
+          value={formData.comments}
+          />  
+          <br/>
+          <input
+          type="checkbox"
+          onChange={changeHandler}
+          name="isVisible"
+          id="isVisible"
+          checked={formData.isVisible}
+          />
+          <label htmlFor='isVisible'>Am I Visible ?</label>
       </form>
     </div>
   );
